@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.rainbow-text {
+  background: linear-gradient(
+    90deg,
+    #2997ff,
+    #a855f7,
+    #ec4899,
+    #f43f5e,
+    #fb923c
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5))
+    drop-shadow(0 0 40px rgba(236, 72, 153, 0.3));
+}
