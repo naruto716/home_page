@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
     }, []);
 
     return (
-        <section id="hero" className="flex flex-col items-center justify-center min-h-screen text-center gap-6">
+        <section id="hero" className="flex flex-col items-center justify-center min-h-screen text-center">
             <div>
                 <p className="text-3xl text-white font-semibold">RewildID Pro</p>
                 <img src="/title.png" alt="Deep Learning Based Animal Re-Identification" className="mt-4 max-w-3xl w-full" />
@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
                 autoPlay
                 muted
                 playsInline
-                className="max-w-4xl w-full rounded-xl"
+                className="max-w-6xl w-full rounded-xl"
             />
 
         </section>
