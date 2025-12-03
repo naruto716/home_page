@@ -1,6 +1,7 @@
 import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
 import { HeroParallaxDemo } from "./components/HeroParallaxDemo";
+import ScrollVideo from "./components/ScrollVideo";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <NavBar />
       <Hero />
       <HeroParallaxDemo />
+      <ScrollVideo />
     </>
   )
 }
