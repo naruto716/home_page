@@ -11,9 +11,7 @@ const Hero: React.FC = () => {
         <section id="hero" className="flex flex-col items-center justify-center min-h-screen text-center gap-6">
             <div>
                 <p className="text-3xl text-white font-semibold">RewildID Pro</p>
-                <h1 className="text-5xl md:text-6xl font-bold mt-4 rainbow-text">
-                    Deep Learning Based<br />Animal Re-Identification
-                </h1>
+                <img src="/title.png" alt="Deep Learning Based Animal Re-Identification" className="mt-4 max-w-3xl w-full" />
             </div>
 
             <video
