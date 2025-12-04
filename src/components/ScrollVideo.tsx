@@ -208,11 +208,25 @@ export const ScrollVideo: React.FC = () => {
   ));
 
   useGSAP(() => {
+    // Separate animation: Video scale (before pinning)
+    gsap.to(".video-container", {
+      scale: 1,
+      borderRadius: "0px",
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",  // Start when top of section reaches bottom of viewport
+        end: "top top",       // End when top of section reaches top of viewport
+        scrub: true,
+      },
+    });
+
+    // Pinned timeline for text, mask, and content
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "bottom top",
+        end: "+=300%",  // Pin for 3x viewport height of scrolling
         scrub: true,
         pin: true,
       },
@@ -239,14 +253,19 @@ export const ScrollVideo: React.FC = () => {
     <section id="showcase" ref={sectionRef} className="relative">
       {/* Media section with video and mask */}
       <div className="media relative overflow-hidden">
-        <video
-          src="/videos/care-hero.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full object-cover object-center"
-        />
+        <div 
+          className="video-container w-full h-screen" 
+          style={{ transform: "scale(0.85)", borderRadius: "40px", overflow: "hidden" }}
+        >
+          <video
+            src="/videos/care-hero.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
         
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/20" />
