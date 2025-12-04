@@ -7,6 +7,7 @@ import React, {
   createContext,
   useContext,
 } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { X } from "lucide-react";
@@ -202,48 +203,47 @@ export const Card = ({
 
   useOutsideClick(containerRef as React.RefObject<HTMLDivElement>, handleClose);
 
+  // Modal rendered via portal to document.body
+  const modalContent = (
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-[9999] overflow-auto flex items-start justify-center pt-20 pb-10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="bg-black/80 backdrop-blur-lg fixed inset-0"
+            onClick={handleClose}
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            ref={containerRef}
+            className="max-w-5xl w-full mx-4 bg-neutral-900 z-[60] p-4 md:p-10 rounded-3xl font-sans relative"
+          >
+            <button
+              className="sticky top-4 h-8 w-8 right-0 ml-auto bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+              onClick={handleClose}
+            >
+              <X className="h-6 w-6 text-white" />
+            </button>
+            <p className="text-base font-medium text-neutral-400">
+              {card.category}
+            </p>
+            <p className="text-2xl md:text-5xl font-semibold text-white mt-4">
+              {card.title}
+            </p>
+            <div className="py-10">{card.content}</div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <>
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 h-screen z-50 overflow-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="bg-black/80 backdrop-blur-lg h-full w-full fixed inset-0"
-            />
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              ref={containerRef}
-              layoutId={layout ? `card-${card.title}` : undefined}
-              className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
-            >
-              <button
-                className="sticky top-4 h-8 w-8 right-0 ml-auto bg-black dark:bg-white rounded-full flex items-center justify-center"
-                onClick={handleClose}
-              >
-                <X className="h-6 w-6 text-white dark:text-black" />
-              </button>
-              <motion.p
-                layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-base font-medium text-black dark:text-white"
-              >
-                {card.category}
-              </motion.p>
-              <motion.p
-                layoutId={layout ? `title-${card.title}` : undefined}
-                className="text-2xl md:text-5xl font-semibold text-neutral-700 mt-4 dark:text-white"
-              >
-                {card.title}
-              </motion.p>
-              <div className="py-10">{card.content}</div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {typeof document !== "undefined" && createPortal(modalContent, document.body)}
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
