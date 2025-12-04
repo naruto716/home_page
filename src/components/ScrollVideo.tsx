@@ -4,6 +4,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { Spotlight } from "@/components/ui/spotlight-new";
+import { Sparkles, Target, Users, BarChart3, Shield } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -277,46 +280,130 @@ export const ScrollVideo: React.FC = () => {
       <div className="showcase-content">
         <div className="container mx-auto px-5 pb-20">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 pt-20">
-            Explore MARS Features
+            Explore RewildID Pro Features
           </h2>
           <Carousel items={cards} />
           
-          {/* Additional content */}
-          <div className="flex flex-col lg:flex-row justify-center gap-20 mt-20">
-            <div className="lg:max-w-md">
-              <h3 className="text-2xl lg:text-4xl font-semibold text-white mb-6">
+          {/* Glowing Grid Section with Spotlight */}
+          <div className="mt-20 relative overflow-hidden rounded-3xl">
+            <Spotlight />
+            <div className="relative z-10 p-8 md:p-12">
+              <h3 className="text-2xl lg:text-4xl font-semibold text-white mb-10 text-center">
                 AI-Powered Conservation
               </h3>
-              <div className="space-y-5 text-lg text-gray-400">
-                <p>
-                  Introducing{" "}
-                  <span className="text-white">
-                    MARS, the next generation of wildlife monitoring
-                  </span>
-                  . Our platform powers conservation efforts worldwide.
-                </p>
-                <p>
-                  It drives intelligent species detection, so researchers can identify, 
-                  track, and protect endangered wildlife with unprecedented accuracy.
-                </p>
-                <p>
-                  Advanced re-identification algorithms enable individual animal tracking 
-                  across multiple camera trap sightings over time.
-                </p>
-              </div>
-            </div>
+              <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
+              {/* Main description card */}
+              <li className="min-h-[14rem] list-none md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]">
+                <div className="relative h-full rounded-2xl border border-neutral-700 p-2 md:rounded-3xl md:p-3">
+                  <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                  <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-neutral-900 p-6">
+                    <div className="relative flex flex-1 flex-col justify-between gap-3">
+                      <div className="w-fit rounded-lg border border-neutral-600 p-2">
+                        <Sparkles className="h-4 w-4 text-neutral-400" />
+                      </div>
+                      <div className="space-y-3">
+                        <h4 className="font-sans text-xl font-semibold text-white md:text-2xl">
+                          Next-Gen Wildlife Monitoring
+                        </h4>
+                        <p className="font-sans text-sm text-neutral-400 md:text-base">
+                          Introducing <strong className="text-white">RewildID Pro</strong>, the next generation of wildlife monitoring. Our platform powers conservation efforts worldwide.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
 
-            <div className="max-w-xs space-y-14">
-              <div className="space-y-2">
-                <p className="text-gray-400">Up to</p>
-                <h4 className="text-4xl lg:text-5xl font-semibold text-white">99%</h4>
-                <p className="text-gray-400">species classification accuracy</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-gray-400">Processing</p>
-                <h4 className="text-4xl lg:text-5xl font-semibold text-white">1M+</h4>
-                <p className="text-gray-400">images analyzed daily</p>
-              </div>
+              {/* Species Detection */}
+              <li className="min-h-[14rem] list-none md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]">
+                <div className="relative h-full rounded-2xl border border-neutral-700 p-2 md:rounded-3xl md:p-3">
+                  <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                  <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-neutral-900 p-6">
+                    <div className="relative flex flex-1 flex-col justify-between gap-3">
+                      <div className="w-fit rounded-lg border border-neutral-600 p-2">
+                        <Target className="h-4 w-4 text-neutral-400" />
+                      </div>
+                      <div className="space-y-3">
+                        <h4 className="font-sans text-xl font-semibold text-white md:text-2xl">
+                          Intelligent Species Detection
+                        </h4>
+                        <p className="font-sans text-sm text-neutral-400 md:text-base">
+                          Researchers can identify, track, and protect endangered wildlife with unprecedented accuracy.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              {/* Re-identification - Large card */}
+              <li className="min-h-[14rem] list-none md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]">
+                <div className="relative h-full rounded-2xl border border-neutral-700 p-2 md:rounded-3xl md:p-3">
+                  <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                  <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-neutral-900 p-6">
+                    <div className="relative flex flex-1 flex-col justify-between gap-3">
+                      <div className="w-fit rounded-lg border border-neutral-600 p-2">
+                        <Users className="h-4 w-4 text-neutral-400" />
+                      </div>
+                      <div className="space-y-3">
+                        <h4 className="font-sans text-xl font-semibold text-white md:text-2xl">
+                          Individual Re-Identification
+                        </h4>
+                        <p className="font-sans text-sm text-neutral-400 md:text-base">
+                          Advanced re-identification algorithms enable individual animal tracking across multiple camera trap sightings over time.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              {/* 99% Accuracy */}
+              <li className="min-h-[14rem] list-none md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]">
+                <div className="relative h-full rounded-2xl border border-neutral-700 p-2 md:rounded-3xl md:p-3">
+                  <GlowingEffect spread={60} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                  <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-neutral-900 p-6">
+                    <div className="relative flex flex-1 flex-col justify-between gap-3">
+                      <div className="w-fit rounded-lg border border-neutral-600 p-2">
+                        <BarChart3 className="h-4 w-4 text-neutral-400" />
+                      </div>
+                      <div className="space-y-3">
+                        <p className="text-sm text-neutral-400">Up to</p>
+                        <h4 className="font-sans text-4xl lg:text-5xl font-bold text-white">
+                          99%
+                        </h4>
+                        <p className="font-sans text-sm text-neutral-400 md:text-base">
+                          species classification accuracy
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              {/* 1M+ Images */}
+              <li className="min-h-[14rem] list-none md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]">
+                <div className="relative h-full rounded-2xl border border-neutral-700 p-2 md:rounded-3xl md:p-3">
+                  <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                  <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-neutral-900 p-6">
+                    <div className="relative flex flex-1 flex-col justify-between gap-3">
+                      <div className="w-fit rounded-lg border border-neutral-600 p-2">
+                        <Shield className="h-4 w-4 text-neutral-400" />
+                      </div>
+                      <div className="space-y-3">
+                        <p className="text-sm text-neutral-400">Processing</p>
+                        <h4 className="font-sans text-4xl lg:text-5xl font-bold text-white">
+                          1M+
+                        </h4>
+                        <p className="font-sans text-sm text-neutral-400 md:text-base">
+                          images analyzed daily
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
             </div>
           </div>
         </div>
