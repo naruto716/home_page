@@ -156,3 +156,45 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Showcase section - matches gsap_macbook_landing */
+#showcase {
+  position: relative;
+}
+
+#showcase .media {
+  position: relative;
+  overflow: hidden;
+}
+
+#showcase .media video {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#showcase .media .mask {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#showcase .media .mask .mask-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transform: matrix(80, 0, 0, 80, 0, 0);
+}
+
+#showcase .showcase-content {
+  position: relative;
+  z-index: 10;
+  margin-top: -10rem;
+  background-color: black;
+  font-weight: 600;
+  font-size: 1.25rem;
+  opacity: 0;
+  transform: translateY(40px);
+}
