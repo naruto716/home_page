@@ -1,11 +1,26 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Preload the font for SVG mask */
+@font-face {
+  font-family: 'MaskFont';
+  src: local('Arial Black'), local('Arial-Black'), local('Arial');
+  font-display: block;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 body {
   background-color: black;
   color: white;
+}
+
+/* Force font load */
+.font-preload {
+  font-family: 'Arial Black', Arial, sans-serif;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .rainbow-text {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const textSections = [
@@ -62,6 +62,13 @@ const TextSection = ({
 
 export const ScrollVideo: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Delay mask render to ensure fonts are loaded
+  useEffect(() => {
+    const timer = setTimeout(() => setIsMounted(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -73,10 +80,13 @@ export const ScrollVideo: React.FC = () => {
   
   // Mask section - appears after text, starts at 0.85
   const maskOpacity = useTransform(scrollYProgress, [0.8, 0.85], [0, 1]);
-  const maskScale = useTransform(scrollYProgress, [0.85, 1], [80, 1]);
+  // End at 0.95 instead of 1 to prevent end-of-scroll jump
+  const maskScaleValue = useTransform(scrollYProgress, [0.85, 0.95], [80, 1]);
 
   return (
     <div ref={containerRef} className="h-[600vh] relative">
+      {/* Hidden element to preload font */}
+      <span className="font-preload">MARSLab</span>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <motion.div
           style={{
@@ -109,37 +119,20 @@ export const ScrollVideo: React.FC = () => {
             />
           ))}
           
-          {/* SVG Mask - appears AFTER text finishes (0.85+) */}
+          {/* SVG Mask */}
+          {isMounted && (
           <motion.div 
             style={{ opacity: maskOpacity }}
             className="absolute inset-0 overflow-hidden"
           >
-            <motion.svg
-              viewBox="0 0 1920 1080"
-              style={{ scale: maskScale }}
-              className="w-full h-full"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <mask id="textMask">
-                  <rect width="1920" height="1080" fill="white"/>
-                  <text 
-                    x="1000" 
-                    y="570" 
-                    textAnchor="middle" 
-                    dominantBaseline="middle"
-                    fontSize="200"
-                    fontWeight="800"
-                    fontFamily="system-ui, -apple-system, sans-serif"
-                    fill="black"
-                  >
-                    MARSLab
-                  </text>
-                </mask>
-              </defs>
-              <rect width="1920" height="1080" fill="black" mask="url(#textMask)"/>
-            </motion.svg>
+            <motion.img
+              src="/mask-logo.svg"
+              alt=""
+              style={{ scale: maskScaleValue }}
+              className="w-full h-full object-cover absolute inset-0"
+            />
           </motion.div>
+          )}
         </motion.div>
       </div>
     </div>
